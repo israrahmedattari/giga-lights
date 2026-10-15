@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GIGA LIGHTS - Smart & Decorative LED Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap"
+        rel="stylesheet" />
+    <style>
+        :root {
+            --bg-dark: #080B10;
+            --card-bg: #111622;
+            --primary-glow: #00f2fe;
+            --accent-gold: #ffb703;
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --border-glow: rgba(0, 242, 254, 0.2);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* Ambient Background Glow */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -20%;
+            left: -10%;
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, rgba(0, 242, 254, 0.08) 0%, transparent 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* HEADER */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            background: rgba(8, 11, 16, 0.85);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border-glow);
+        }
+
+        /* Animated LED Hero Background */
+        /* HERO CONTAINER */
+        .hero {
+            position: relative;
+            text-align: center;
+            padding: 6rem 1rem 5rem;
+            overflow: hidden;
+            background: #080B10;
+            border-bottom: 1px solid var(--border-glow);
+        }
+
+        /* ANIMATED BACKGROUND LED BULB SVG */
+        .hero-led-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -55%);
+            width: 380px;
+            height: 380px;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0.25;
+            animation: bulbPulse 4s infinite ease-in-out;
+        }
+
+        /* NEON GLOW AURA BEHIND BULB */
+        .hero-glow-aura {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(0, 242, 254, 0.35) 0%, rgba(255, 183, 3, 0.15) 50%, transparent 70%);
+            border-radius: 50%;
+            z-index: 1;
+            pointer-events: none;
+            filter: blur(40px);
+            animation: auraGlow 6s infinite alternate ease-in-out;
+        }
+
+        /* BRAND WATERMARK */
+        .brand-watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 7.5rem;
+            font-weight: 800;
+            color: rgba(255, 255, 255, 0.03);
+            letter-spacing: 14px;
+            white-space: nowrap;
+            user-select: none;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* HERO TEXT CONTENT */
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 span {
+            color: var(--primary-glow);
+            text-shadow: 0 0 20px rgba(0, 242, 254, 0.8);
+            animation: textNeonPulse 2.5s infinite ease-in-out;
+        }
+
+        /* KEYFRAME ANIMATIONS */
+        @keyframes bulbPulse {
+
+            0%,
+            100% {
+                transform: translate(-50%, -55%) scale(1);
+                filter: drop-shadow(0 0 15px rgba(0, 242, 254, 0.4));
+            }
+
+            50% {
+                transform: translate(-50%, -55%) scale(1.08);
+                filter: drop-shadow(0 0 35px rgba(0, 242, 254, 0.8)) drop-shadow(0 0 15px rgba(255, 183, 3, 0.6));
+            }
+        }
+
+        @keyframes auraGlow {
+            0% {
+                transform: translate(-50%, -50%) scale(0.9);
+                opacity: 0.5;
+            }
+
+            100% {
+                transform: translate(-50%, -50%) scale(1.3);
+                opacity: 0.9;
+            }
+        }
+
+        @keyframes textNeonPulse {
+
+            0%,
+            100% {
+                text-shadow: 0 0 15px rgba(0, 242, 254, 0.6), 0 0 30px rgba(0, 242, 254, 0.4);
+            }
+
+            50% {
+                text-shadow: 0 0 25px rgba(0, 242, 254, 1), 0 0 50px rgba(0, 242, 254, 0.8), 0 0 70px rgba(255, 183, 3, 0.5);
+            }
+        }
+
+        .logo-img {
+            height: 42px;
+            width: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-img:hover {
+            transform: scale(1.03);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .nav-btn {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .nav-btn:hover {
+            background: rgba(0, 242, 254, 0.1);
+            color: var(--primary-glow);
+            border-color: var(--border-glow);
+        }
+
+        .cart-badge {
+            background: var(--accent-gold);
+            color: #000;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            margin-left: 5px;
+            font-weight: bold;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            text-align: center;
+            padding: 3.5rem 1rem 2rem;
+            background: radial-gradient(circle at center, rgba(0, 242, 254, 0.12) 0%, transparent 70%);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 0.8rem;
+            letter-spacing: -0.5px;
+        }
+
+        .hero h1 span {
+            color: var(--primary-glow);
+            text-shadow: 0 0 20px rgba(0, 242, 254, 0.6);
+        }
+
+        .hero p {
+            color: var(--text-dim);
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        /* FEATURED / RANDOM LED SPOTLIGHT */
+        .spotlight-container {
+            max-width: 1100px;
+            margin: 1.5rem auto 3rem;
+            padding: 0 5%;
+        }
+
+        .spotlight-card {
+            background: linear-gradient(135deg, rgba(17, 22, 34, 0.9), rgba(8, 11, 16, 0.95));
+            border: 2px solid var(--primary-glow);
+            border-radius: 24px;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 2rem;
+            align-items: center;
+            box-shadow: 0 0 30px rgba(0, 242, 254, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .spotlight-tag {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: var(--accent-gold);
+            color: #000;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: 800;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            animation: pulseGlow 2s infinite;
+        }
+
+        .spotlight-img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+            transition: transform 0.4s ease;
+        }
+
+        .spotlight-card:hover .spotlight-img {
+            transform: scale(1.02);
+        }
+
+        .spotlight-info h2 {
+            font-size: 2rem;
+            margin: 10px 0;
+            color: #fff;
+        }
+
+        .spotlight-info p {
+            color: var(--text-dim);
+            margin-bottom: 1.2rem;
+            line-height: 1.5;
+        }
+
+        .spotlight-controls {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .spin-btn {
+            background: transparent;
+            color: var(--accent-gold);
+            border: 1px solid var(--accent-gold);
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .spin-btn:hover {
+            background: rgba(255, 183, 3, 0.15);
+        }
+
+        /* PRODUCTS GRID */
+        .grid-header {
+            padding: 0 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 0 5% 4rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            border: 1px solid var(--border-glow);
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 242, 254, 0.25);
+            border-color: var(--primary-glow);
+        }
+
+        .card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .card:hover img {
+            transform: scale(1.05);
+        }
+
+        .card-body {
+            padding: 1.2rem;
+        }
+
+        .badge {
+            font-size: 0.75rem;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 4px 8px;
+            border-radius: 6px;
+            color: var(--primary-glow);
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            margin: 10px 0 5px;
+            font-weight: 700;
+        }
+
+        .specs {
+            display: flex;
+            gap: 10px;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-bottom: 12px;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .price {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--accent-gold);
+        }
+
+        .add-btn {
+            background: var(--primary-glow);
+            color: #000;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .add-btn:hover {
+            background: #fff;
+            box-shadow: 0 0 15px var(--primary-glow);
+            transform: scale(1.02);
+        }
+
+        .out-of-stock {
+            color: #ff4d4d;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #040609;
+            border-top: 1px solid var(--border-glow);
+            padding: 3rem 5% 1.5rem;
+            margin-top: auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .footer-brand p {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            margin-top: 12px;
+            line-height: 1.6;
+        }
+
+        .footer-col h4 {
+            color: #fff;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            position: relative;
+        }
+
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 30px;
+            height: 2px;
+            background: var(--primary-glow);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-col ul li a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--primary-glow);
+            padding-left: 4px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulseGlow {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 183, 3, 0.6);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(255, 183, 3, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 183, 3, 0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .spotlight-card {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <a href="/" class="logo">
+            <img src="/static/logo.svg" alt="GIGA LIGHTS Logo" class="logo-img"
+                onerror="this.outerHTML='<span style=\'color:#00f2fe;font-weight:800;font-size:1.5rem;\'>⚡ GIGA LIGHTS</span>'">
+        </a>
+        <div class="nav-links">
+            <a href="/cart" class="nav-btn">🛒 Cart <span class="cart-badge" id="cartCount">0</span></a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION WITH ANIMATED GLOWING LED BULB BACKGROUND -->
+    <section class="hero">
+        <!-- Neon Glow Aura -->
+        <div class="hero-glow-aura"></div>
+
+        <!-- Animated Glowing LED Vector Bulb -->
+        <svg class="hero-led-bg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <!-- Light Rays -->
+            <g stroke="#00f2fe" stroke-width="2" stroke-linecap="round" opacity="0.6">
+                <line x1="100" y1="10" x2="100" y2="25" />
+                <line x1="35" y1="35" x2="48" y2="48" />
+                <line x1="165" y1="35" x2="152" y2="48" />
+                <line x1="10" y1="100" x2="25" y2="100" />
+                <line x1="190" y1="100" x2="175" y2="100" />
+            </g>
+
+            <!-- Outer Glass Bulb -->
+            <path
+                d="M 100 35 A 45 45 0 0 1 145 80 C 145 98 132 110 128 125 L 72 125 C 68 110 55 98 55 80 A 45 45 0 0 1 100 35 Z"
+                fill="none" stroke="#00f2fe" stroke-width="3.5" />
+
+            <!-- Glowing LED Filament (G-Shape) -->
+            <path d="M 115 70 A 18 18 0 1 0 115 95 L 100 95 L 108 78 L 92 86 L 100 68" fill="none" stroke="#ffb703"
+                stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+
+            <!-- Bulb Screw Base -->
+            <path d="M 75 132 L 125 132 M 80 140 L 120 140 M 85 148 L 115 148" fill="none" stroke="#64748b"
+                stroke-width="3" stroke-linecap="round" />
+        </svg>
+
+        <!-- Brand Watermark -->
+        <div class="brand-watermark">GIGA LIGHTS</div>
+
+        <!-- Foreground Content -->
+        <div class="hero-content">
+            <h1>Illuminate Your World with <span>GIGA LIGHTS</span></h1>
+            <p>Next-generation, high-lumen, and energy-efficient LED technology built for maximum brightness,
+                durability, and style.</p>
+        </div>
+    </section>
+
+    <!-- FEATURED / RANDOM LED BULB SPOTLIGHT -->
+    <section class="spotlight-container">
+        <div class="spotlight-card" id="spotlightCard">
+            <span class="spotlight-tag">🌟 Bulb Spotlight</span>
+            <img id="spotlightImg" src="https://images.unsplash.com/photo-1550985616-10810253b84d?w=600"
+                class="spotlight-img" alt="Spotlight Bulb">
+            <div class="spotlight-info">
+                <span class="badge" id="spotlightCategory">Smart LED</span>
+                <h2 id="spotlightTitle">Loading Featured Light...</h2>
+                <div class="specs" style="margin: 10px 0 15px;">
+                    <span id="spotlightWattage">⚡ 12W</span> • <span id="spotlightLumens">💡 1200 LM</span>
+                </div>
+                <p id="spotlightDesc">Discover high-efficiency LED illumination designed to transform modern living
+                    spaces.</p>
+                <div class="price-row" style="margin-top:20px;">
+                    <div class="price" id="spotlightPrice">PKR 0.00</div>
+                    <div class="spotlight-controls">
+                        <button class="spin-btn" onclick="loadRandomProduct()">⚡ Pick Another Bulb</button>
+                        <div id="spotlightCartContainer"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CATALOG TITLE -->
+    <div class="grid-header">
+        <h2>💡 Complete LED Lineup</h2>
+    </div>
+
+    <!-- PRODUCTS CATALOG GRID -->
+    <main class="products-grid">
+        {% for p in products %}
+        <div class="card">
+            <img src="{{ p['image_url'] }}" alt="{{ p['title'] }}">
+            <div class="card-body">
+                <span class="badge">{{ p['category'] }}</span>
+                <h3 class="card-title">{{ p['title'] }}</h3>
+                <div class="specs">
+                    <span>⚡ {{ p['wattage'] }}</span> • <span>💡 {{ p['lumens'] }}</span>
+                </div>
+                <div class="price-row">
+                    <div class="price">{{ "%.2f"|format(p['price']) }}PKR</div>
+                    {% if p['quantity'] > 0 %}
+                    <button class="add-btn" data-id="{{ p['id'] }}" data-title="{{ p['title'] }}"
+                        data-price="{{ p['price'] }}" onclick="handleAddToCart(this)">
+                        + Add to Cart
+                    </button>
+                    {% else %}
+                    <span class="out-of-stock">Out of Stock</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <p style="grid-column: 1/-1; text-align: center; color: var(--text-dim); padding: 3rem 0;">No products available
+            in database. Add new inventory inside the Admin Panel!</p>
+        {% endfor %}
+    </main>
+
+    <!-- ATTRACTIVE FOOTER -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <img src="/static/logo.svg" alt="GIGA LIGHTS" style="height:35px;"
+                    onerror="this.outerHTML='<h3 style=\'color:#00f2fe;\'>⚡ GIGA LIGHTS</h3>'">
+                <p>Engineered for maximum lumens, zero flicker, and ultimate energy savings. Transforming homes and
+                    commercial spaces with next-gen lighting technology.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="/">Storefront</a></li>
+                    <li><a href="/cart">Shopping Cart</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Categories</h4>
+                <ul>
+                    <li><a href="/?category=Smart LED">Smart RGB Bulbs</a></li>
+                    <li><a href="/?category=Decorative">Decorative Lights</a></li>
+                    <li><a href="/?category=Flood Light">Outdoor Floodlights</a></li>
+                    <li><a href="/?category=Standard Bulb">Standard Bulbs</a></li>
+                    <li><a href="/">View All Products</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <div class="footer-col">
+                    <h4>Customer Care</h4>
+                    <ul>
+                        <li><a href="/warranty">⚡ 2-Year Warranty</a></li>
+                        <li><a href="/shipping">📦 Express Shipping</a></li>
+                        <li><a href="https://wa.me/923404890432?text=Hi%20GIGA%20LIGHTS,%20I%20have%20a%20question"
+                                target="_blank">💬 WhatsApp Direct Support</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>© 2026 <strong>GIGA LIGHTS Inc.</strong> All rights reserved.</div>
+            <div>Designed with High-Lumen Precision</div>
+        </div>
+    </footer>
+
+    <!-- CLIENT JAVASCRIPT -->
+    <script>
+        // Store product list passed from backend for the random spotlight feature
+        const allProducts = JSON.parse('{{ products | tojson | safe }}');
+
+        function updateCartCount() {
+            let cart = JSON.parse(localStorage.getItem('giga_cart') || '[]');
+            let count = cart.reduce((acc, item) => acc + item.qty, 0);
+            document.getElementById('cartCount').innerText = count;
+        }
+
+        function handleAddToCart(btn) {
+            const id = parseInt(btn.getAttribute('data-id'));
+            const title = btn.getAttribute('data-title');
+            const price = parseFloat(btn.getAttribute('data-price'));
+
+            addToCart(id, title, price);
+        }
+
+        function addToCart(id, title, price) {
+            let cart = JSON.parse(localStorage.getItem('giga_cart') || '[]');
+            let existing = cart.find(item => item.id === id);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push({ id, title, price, qty: 1 });
+            }
+            localStorage.setItem('giga_cart', JSON.stringify(cart));
+            updateCartCount();
+            alert(`Added "${title}" to your cart!`);
+        }
+
+        // Random LED Spotlight Loader
+        function loadRandomProduct() {
+            if (!allProducts || allProducts.length === 0) {
+                document.querySelector('.spotlight-container').style.display = 'none';
+                return;
+            }
+
+            const randomIndex = Math.floor(Math.random() * allProducts.length);
+            const p = allProducts[randomIndex];
+
+            document.getElementById('spotlightImg').src = p.image_url;
+            document.getElementById('spotlightCategory').innerText = p.category;
+            document.getElementById('spotlightTitle').innerText = p.title;
+            document.getElementById('spotlightWattage').innerText = `⚡ ${p.wattage || 'N/A'}`;
+            document.getElementById('spotlightLumens').innerText = `💡 ${p.lumens || 'N/A'}`;
+            document.getElementById('spotlightDesc').innerText = p.description || "Ultra-bright, eco-friendly LED technology crafted for long-lasting performance.";
+            document.getElementById('spotlightPrice').innerText = `PKR ${parseFloat(p.price).toFixed(2)}`;
+
+            const btnContainer = document.getElementById('spotlightCartContainer');
+            if (p.quantity > 0) {
+                btnContainer.innerHTML = `
+                    <button class="add-btn" 
+                            data-id="${p.id}" 
+                            data-title="${p.title}" 
+                            data-price="${p.price}" 
+                            onclick="handleAddToCart(this)">
+                        + Add Spotlight Bulb
+                    </button>
+                `;
+            } else {
+                btnContainer.innerHTML = `<span class="out-of-stock">Out of Stock</span>`;
+            }
+        }
+
+        // Initialize Page
+        updateCartCount();
+        loadRandomProduct();
+    </script>
+</body>
+
+</html>

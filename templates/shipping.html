@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Express Shipping Policy - GIGA LIGHTS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #080B10;
+            --card-bg: #111622;
+            --primary-glow: #00f2fe;
+            --accent-gold: #ffb703;
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --border-glow: rgba(0, 242, 254, 0.2);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background: var(--bg-dark); color: var(--text-main); padding: 2rem 5%; min-height: 100vh; }
+
+        header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2.5rem; }
+        header a { color: var(--primary-glow); text-decoration: none; font-weight: 600; }
+
+        .shipping-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-glow);
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            box-shadow: 0 0 30px rgba(0, 242, 254, 0.08);
+        }
+        .shipping-card h1 { color: #fff; margin-bottom: 1.5rem; font-size: 2.2rem; }
+        .shipping-card h2 { color: var(--primary-glow); margin: 2rem 0 1rem; font-size: 1.3rem; }
+        .shipping-card p { color: var(--text-dim); line-height: 1.7; margin-bottom: 1rem; }
+
+        .timeline-box {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .step {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 1rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .step span { font-size: 1.8rem; display: block; margin-bottom: 0.5rem; }
+        .step strong { color: var(--accent-gold); display: block; margin-bottom: 0.3rem; }
+        
+        .support-banner {
+            text-align: center;
+            background: linear-gradient(135deg, rgba(37, 211, 102, 0.1), rgba(0, 242, 254, 0.05));
+            border: 1px solid rgba(37, 211, 102, 0.3);
+            padding: 2rem;
+            border-radius: 16px;
+            margin-top: 2rem;
+        }
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #25D366;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="/">← Back to Store</a>
+        <img src="/static/logo.svg" alt="GIGA LIGHTS" style="height:35px;" onerror="this.outerHTML='<h2 style=\'color:#00f2fe;\'>⚡ GIGA LIGHTS</h2>'">
+    </header>
+
+    <div class="shipping-card">
+        <h1>📦 Express Delivery & Shipping</h1>
+        <p>At GIGA LIGHTS, we package every fragile bulb with anti-shock foam insulation to ensure zero transit damage and immediate lighting upon arrival.</p>
+
+        <div class="timeline-box">
+            <div class="step">
+                <span>⚡</span>
+                <strong>Same-Day Dispatch</strong>
+                <p style="font-size: 0.85rem;">Orders placed before 2:00 PM</p>
+            </div>
+            <div class="step">
+                <span>🚚</span>
+                <strong>2-4 Day Delivery</strong>
+                <p style="font-size: 0.85rem;">Standard Express Courier</p>
+            </div>
+            <div class="step">
+                <span>📲</span>
+                <strong>Live WhatsApp Tracking</strong>
+                <p style="font-size: 0.85rem;">Real-time dispatch updates</p>
+            </div>
+        </div>
+
+        <h2>Shipping Rates</h2>
+        <p>• <strong>Free Shipping:</strong> On all orders containing 3 or more products.</p>
+        <p>• <strong>Flat Express Rate:</strong> A flat 150.00PKR delivery fee applies to single or double-item orders.</p>
+
+        <div class="support-banner">
+            <h3>Need Order Status Updates?</h3>
+            <p>Get real-time tracking links directly sent to your phone number.</p>
+            <a href="https://wa.me/923404890432?text=Hi%20GIGA%20LIGHTS,%20I%20want%20to%20track%20my%20order" target="_blank" class="whatsapp-btn">
+                💬 Track Order on WhatsApp
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Cart - GIGA LIGHTS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg-dark: #080B10; --card-bg: #111622; --primary-glow: #00f2fe; --accent-gold: #ffb703; --text-main: #f8fafc; --text-dim: #94a3b8; }
+        body { background: var(--bg-dark); color: var(--text-main); font-family: 'Plus Jakarta Sans', sans-serif; padding: 2rem 5%; }
+        header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+        a { color: var(--primary-glow); text-decoration: none; }
+        .cart-container { display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; }
+        .cart-items, .checkout-box { background: var(--card-bg); padding: 1.5rem; border-radius: 12px; border: 1px solid rgba(0, 242, 254, 0.2); }
+        .item-row { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding: 10px 0; }
+        input, textarea { width: 100%; padding: 10px; margin: 8px 0 15px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); color: #fff; border-radius: 6px; }
+        .checkout-btn { width: 100%; padding: 12px; background: #25D366; color: #fff; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1rem; }
+    </style>
+</head>
+<body>
+    <header>
+        <div style="display: flex; align-items: center; gap: 15px;">
+    <a href="/"><img src="/static/logo.svg" alt="GIGA LIGHTS Logo" style="height: 40px; width: auto;"></a>
+    <h1>🛒 Your Cart</h1>
+</div>
+        <a href="/">← Continue Shopping</a>
+    </header>
+
+    <div class="cart-container">
+        <div class="cart-items" id="cartList"></div>
+        
+        <div class="checkout-box">
+            <h3>Customer Checkout</h3>
+            <label>Full Name</label>
+            <input type="text" id="custName" placeholder="Ahmed" required>
+            <label>Phone Number</label>
+            <input type="text" id="custPhone" placeholder="+92 234 567 890" required>
+            <label>Shipping Address</label>
+            <textarea id="custAddress" rows="3" placeholder="Enter Your Shipping Address" required></textarea>
+            
+             <h3>Total: PKR <span id="totalPrice">0.00</span></h3>
+            <button class="checkout-btn" onclick="submitOrder()">Place Order & Notify Store</button>
+        </div>
+    </div>
+
+    <script>
+        // Enter your Business WhatsApp number here (with country code, no +)
+        const STORE_WHATSAPP_NUMBER = "+923404890432"; 
+
+        function renderCart() {
+            let cart = JSON.parse(localStorage.getItem('giga_cart') || '[]');
+            let list = document.getElementById('cartList');
+            let total = 0;
+
+            if(cart.length === 0) {
+                list.innerHTML = "<p>Your cart is empty.</p>";
+                document.getElementById('totalPrice').innerText = "0.00";
+                return;
+            }
+
+            let html = "";
+            cart.forEach((item, index) => {
+                let subtotal = item.price * item.qty;
+                total += subtotal;
+                html += `
+                    <div class="item-row">
+                        <div>
+                            <h4>${item.title}</h4>
+                            <small>PKR ${item.price.toFixed(2)} x ${item.qty}</small>
+                        </div>
+                        <div>
+                            <strong>PKR ${subtotal.toFixed(2)}</strong>
+                            <button onclick="removeItem(${index})" style="background:red; color:#fff; border:none; padding:4px 8px; margin-left:10px; border-radius:4px; cursor:pointer;">X</button>
+                        </div>
+                    </div>
+                `;
+            });
+            list.innerHTML = html;
+            document.getElementById('totalPrice').innerText = total.toFixed(2);
+        }
+
+        function removeItem(index) {
+            let cart = JSON.parse(localStorage.getItem('giga_cart') || '[]');
+            cart.splice(index, 1);
+            localStorage.setItem('giga_cart', JSON.stringify(cart));
+            renderCart();
+        }
+
+        async function submitOrder() {
+            let cart = JSON.parse(localStorage.getItem('giga_cart') || '[]');
+            let name = document.getElementById('custName').value;
+            let phone = document.getElementById('custPhone').value;
+            let address = document.getElementById('custAddress').value;
+            let total = parseFloat(document.getElementById('totalPrice').innerText);
+
+            if(!name || !phone || !address) {
+                alert("Please fill in all customer details.");
+                return;
+            }
+            if(cart.length === 0) {
+                alert("Your cart is empty!");
+                return;
+            }
+
+            let response = await fetch('/place_order', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, phone, address, cart, total })
+            });
+
+            let res = await response.json();
+            if(res.success) {
+                localStorage.removeItem('giga_cart');
+                alert("Order placed successfully! Redirecting to notify the store owner on WhatsApp...");
+                
+                // Redirect customer to send instant order details on WhatsApp
+                let encodedMsg = encodeURIComponent(res.message_summary);
+                window.location.href = `https://wa.me/${STORE_WHATSAPP_NUMBER}?text=${encodedMsg}`;
+            } else {
+                alert("Error placing order: " + res.message);
+            }
+        }
+
+        renderCart();
+    </script>
+</body>
+</html>
